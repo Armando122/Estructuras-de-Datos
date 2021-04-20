@@ -4,8 +4,6 @@
 
 Este código está hecho en [`scala`](https://www.scala-lang.org/), para ejecutarlo y correr las pruebas se utilizó [`sbt`](https://www.scala-sbt.org/index.html).
 
-### Documentación
-
 ### Compilación
 
 Para compilar el código, se debe compilar con:

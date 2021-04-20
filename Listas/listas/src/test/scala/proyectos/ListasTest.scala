@@ -5,21 +5,77 @@ import proyectos.Listas
 
 class ListasTest extends AnyFunSuite {
 
+  val lista = new Lista[Int]
+
+  /** Test del método agrega de listas. */
   test("Listas.agrega") {
-    assert(Listas.agrega(3) == l)
+    lista.agrega(2)
+    assert(lista.elementos == 1)
+    lista.elimina(2)
+    assert(lista.elementos == 0)
   }
 
-  test("Listas.elimina") {}
+  /** Test del método elimina de listas. */
+  test("Listas.elimina") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.elimina(2)
+    assert(lista.elementos == 1)
+    lista.elimina(1)
+    assert(lista.elementos == 0)
+  }
 
-  test("Listas.contiene") {}
+  /** Test del método contiene de listas. */
+  test("Listas.contiene") {
+    assert(lista.contiene(3) == false)
+    lista.agrega(4)
+    assert(lista.contiene(4) == true)
+    lista.elimina(4)
+  }
 
-  test("Listas.esVacia") {}
+  /** Test del método esVacia de listas. */
+  test("Listas.esVacia") {
+    assert(lista.esVacia == true)
+    lista.agrega(9)
+    assert(lista.esVacia == false)
+    lista.elimina(9)
+  }
 
-  test("Listas.elementos") {}
+  /** Test del método elementos de listas. */
+  test("Listas.elementos") {
+    assert(lista.elementos == 0)
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    lista.agrega(4)
+    assert(lista.elementos == 4)
+    lista.limpia
+  }
 
-  test("Listas.limpia") {}
+  /** Test del método limpia de listas. */
+  test("Listas.limpia") {
+    assert(lista.elementos == 0)
+    for(i <- 0 until 10) {
+      lista.agrega(i)
+    }
+    assert(lista.elementos == 10)
+    lista.limpia
+    assert(lista.elementos == 0)
+  }
 
-  test("Listas.toString") {}
+  /** Test del método toString de listas. */
+  test("Listas.toString") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    lista.agrega(4)
+    lista.agrega(5)
+    lista.agrega(6)  //[1,2,3,4,5,6]
+    var listaStr = lista.toString
+    val prueba = "[1,2,3,4,5,6]"
+    assert(listaStr.equals(prueba))
+    lista.limpia
+  }
 
   test("Listas.equals") {}
 
