@@ -73,19 +73,63 @@ class ListasTest extends AnyFunSuite {
     lista.agrega(6)  //[1,2,3,4,5,6]
     var listaStr = lista.toString
     val prueba = "[1,2,3,4,5,6]"
-    assert(listaStr.equals(prueba))
+    assert(listaStr.equals(prueba) == true)
     lista.limpia
   }
 
-  test("Listas.equals") {}
+  test("Listas.equals") {
+    val listaPrueba = new Lista[Int]
+    assert(lista.equals(listaPrueba) == true)
+    listaPrueba.agrega(1)
+    assert(lista.equals(listaPrueba) == false)
+    listaPrueba.limpia
+    for(i <- 0 until 10) {
+      lista.agrega(i)
+      listaPrueba.agrega(i)
+    }
+    assert(lista.equals(listaPrueba) == true)
+    lista.limpia
+  }
 
-  test("Listas.longitud") {}
+  test("Listas.longitud") {
+    assert(lista.longitud == 0)
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    lista.agrega(4)
+    assert(lista.longitud == 4)
+    lista.limpia
+  }
 
-  test("Listas.agregaFinal") {}
+  test("Listas.agregaFinal") {
+    lista.agregaFinal(1)
+    lista.agregaFinal(2)
+    assert(lista.ultimo == 2)
+    lista.eliminaUltimo
+    assert(lista.ultimo == 1)
+    lista.limpia
+  }
 
-  test("Listas.agregaInicio") {}
+  test("Listas.agregaInicio") {
+    lista.agregaInicio(1)
+    lista.agregaInicio(2)
+    assert(lista.ultimo == 1)
+    lista.eliminaUltimo
+    assert(lista.ultimo == 2)
+    lista.limpia
+  }
 
-  test("Listas.inserta") {}
+  test("Listas.inserta") {
+    val listaPrueba = [1,3,2,3]
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    assert(lista.longitud == 3)
+    lista.inserta(1,3) //[1,3,2,3]
+    assert(lista.longitud == 4)
+    assert(lista.equals(listaPrueba))
+    lista.limpia
+  }
 
   test("Listas.eliminaPrimero") {}
 
