@@ -6,6 +6,7 @@ import proyectos.Listas
 class ListasTest extends AnyFunSuite {
 
   val lista = new Lista[Int]
+  val iterador = lista.iteradorLista
 
   /** Test del método agrega de listas. */
   test("Listas.agrega") {
@@ -157,36 +158,146 @@ class ListasTest extends AnyFunSuite {
   }
 
   /** Test del método primero de listas. */
-  test("Listas.primero") {}
+  test("Listas.primero") {
+    lista.agrega(9)
+    lista.agrega(2)
+    lista.agrega(6)
+    lista.agrega(1)
+    lista.agrega(7)
+    lista.agrega(8)
+    lista.agrega(92)
+    val valor = lista.primero
+    assert(valor == 9)
+    lista.limpia
+  }
 
   /** Test del método ultimo de listas. */
-  test("Listas.ultimo") {}
+  test("Listas.ultimo") {
+    lista.agrega(9)
+    lista.agrega(2)
+    lista.agrega(6)
+    lista.agrega(1)
+    lista.agrega(7)
+    lista.agrega(8)
+    lista.agrega(92)
+    val valor = lista.ultimo
+    assert(valor == 92)
+    lista.limpia
+  }
 
   /** Test del método obtener de listas. */
-  test("Listas.obtener") {}
+  test("Listas.obtener") {
+    lista.agrega(9)
+    lista.agrega(2)
+    lista.agrega(6)
+    lista.agrega(1)
+    lista.agrega(7)
+    lista.agrega(8)
+    lista.agrega(92)
+    var valor = lista.obtener(0)
+    assert(valor == 9)
+    valor = lista.obtener(3)
+    assert(valor == 1)
+    valor = lista.obtener(6)
+    assert(valor == 92)
+    lista.limpia
+  }
 
   /** Test del método copia de listas. */
-  test("Listas.copia") {}
+  test("Listas.copia") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val copia = lista.copia
+    assert(copia.equals(lista))
+    lista.limpia
+  }
 
   /** Test del método reversa de listas. */
-  test("Listas.reversa") {}
+  test("Listas.reversa") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val reversa = lista.reversa
+    assert(!reversa.equals(lista))
+    assert(reversa.obtener(0) == lista.obtener(2))
+    assert(reversa.obtener(1) == lista.obtener(1))
+    assert(reversa.obtener(2) == lista.obtener(0))
+    lista.limpia
+  }
 
   /** Test del método indiceDe de listas. */
-  test("Listas.indiceDe") {}
+  test("Listas.indiceDe") {
+    lista.agrega(3)
+    lista.agrega(4)
+    lista.agrega(8)
+    assert(lista.indiceDe(3) == 0)
+    assert(lista.indiceDe(4) == 1)
+    assert(lista.indiceDe(8) == 2)
+    lista.limpia
+  }
 
   /** Test del método hasNext de listas. */
-  test("Listas.hasNext") {}
+  test("Listas.hasNext") {
+    assert(iterador.hasNext == false)
+    lista.agrega(7)
+    assert(iterador.hasNext == true)
+    lista.limpia
+  }
 
   /** Test del método next de listas. */
-  test("Listas.next") {}
+  test("Listas.next") {
+    lista.agrega(8)
+    lista.agrega(9)
+    lista.agrega(2)
+    iterador.start
+    assert(iterador.next == 8)
+    assert(iterador.next == 9)
+    lista.limpia
+  }
 
   /** Test del método hasPrevious de listas. */
-  test("Listas.hasPrevious") {}
+  test("Listas.hasPrevious") {
+    assert(iterador.hasPrevious == false)
+    lista.agrega(7)
+    lista.agrega(3)
+    lista.agrega(78)
+    iterador.end
+    assert(iterador.hasPrevious == true)
+    lista.limpia
+  }
+
+  /** Test del método previous de listas. */
+  test("Listas.previous") {
+    lista.agrega(8)
+    lista.agrega(9)
+    lista.agrega(2)
+    iterador.end
+    assert(iterador.previous == 2)
+    assert(iterador.previous == 9)
+    lista.limpia
+  }
 
   /** Test del método start de listas. */
-  test("Listas.start") {}
+  test("Listas.start") {
+    for(i <- 0 until 100) {
+      lista.agrega(i)
+    }
+    iterador.start
+    assert(iterador.next == 0)
+    assert(iterador.next == 1)
+    lista.limpia
+  }
 
   /** Test del método end de listas. */
-  test("Listas.end") {}
+  test("Listas.end") {
+    for(i <- 0 until 100) {
+      lista.agrega(i)
+    }
+    iterador.end
+    assert(iterador.previous == 100)
+    assert(iterador.previous == 99)
+    lista.limpia
+  }
 
 }
