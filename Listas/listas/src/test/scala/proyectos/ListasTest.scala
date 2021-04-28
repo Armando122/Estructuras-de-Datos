@@ -77,6 +77,7 @@ class ListasTest extends AnyFunSuite {
     lista.limpia
   }
 
+  /** Test del método equals de listas. */
   test("Listas.equals") {
     val listaPrueba = new Lista[Int]
     assert(lista.equals(listaPrueba) == true)
@@ -91,6 +92,7 @@ class ListasTest extends AnyFunSuite {
     lista.limpia
   }
 
+  /** Test del método longitud de listas. */
   test("Listas.longitud") {
     assert(lista.longitud == 0)
     lista.agrega(1)
@@ -101,6 +103,7 @@ class ListasTest extends AnyFunSuite {
     lista.limpia
   }
 
+  /** Test del método agregaFinal de listas. */
   test("Listas.agregaFinal") {
     lista.agregaFinal(1)
     lista.agregaFinal(2)
@@ -110,6 +113,7 @@ class ListasTest extends AnyFunSuite {
     lista.limpia
   }
 
+  /** Test del método agregaInicio de listas. */
   test("Listas.agregaInicio") {
     lista.agregaInicio(1)
     lista.agregaInicio(2)
@@ -119,6 +123,7 @@ class ListasTest extends AnyFunSuite {
     lista.limpia
   }
 
+  /** Test del método inserta de listas. */
   test("Listas.inserta") {
     val listaPrueba = [1,3,2,3]
     lista.agrega(1)
@@ -131,30 +136,57 @@ class ListasTest extends AnyFunSuite {
     lista.limpia
   }
 
-  test("Listas.eliminaPrimero") {}
+  /** Test del método eliminaPrimero de listas. */
+  test("Listas.eliminaPrimero") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val valor = lista.eliminaPrimero
+    assert(valor == 1)
+    lista.limpia
+  }
 
-  test("Listas.eliminaUltimo") {}
+  /** Test del método eliminaUltimo de listas. */
+  test("Listas.eliminaUltimo") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val valor = lista.eliminaUltimo
+    assert(valor == 3)
+    lista.limpia
+  }
 
+  /** Test del método primero de listas. */
   test("Listas.primero") {}
 
+  /** Test del método ultimo de listas. */
   test("Listas.ultimo") {}
 
+  /** Test del método obtener de listas. */
   test("Listas.obtener") {}
 
+  /** Test del método copia de listas. */
   test("Listas.copia") {}
 
+  /** Test del método reversa de listas. */
   test("Listas.reversa") {}
 
+  /** Test del método indiceDe de listas. */
   test("Listas.indiceDe") {}
 
+  /** Test del método hasNext de listas. */
   test("Listas.hasNext") {}
 
+  /** Test del método next de listas. */
   test("Listas.next") {}
 
+  /** Test del método hasPrevious de listas. */
   test("Listas.hasPrevious") {}
 
+  /** Test del método start de listas. */
   test("Listas.start") {}
 
+  /** Test del método end de listas. */
   test("Listas.end") {}
 
 }
