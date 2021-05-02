@@ -6,6 +6,7 @@ import proyectos.Listas
 class ListasTest extends AnyFunSuite {
 
   val lista = new Lista[Int]
+  val iterador = lista.iteradorLista
 
   /** Test del método agrega de listas. */
   test("Listas.agrega") {
@@ -73,44 +74,230 @@ class ListasTest extends AnyFunSuite {
     lista.agrega(6)  //[1,2,3,4,5,6]
     var listaStr = lista.toString
     val prueba = "[1,2,3,4,5,6]"
-    assert(listaStr.equals(prueba))
+    assert(listaStr.equals(prueba) == true)
     lista.limpia
   }
 
-  test("Listas.equals") {}
+  /** Test del método equals de listas. */
+  test("Listas.equals") {
+    val listaPrueba = new Lista[Int]
+    assert(lista.equals(listaPrueba) == true)
+    listaPrueba.agrega(1)
+    assert(lista.equals(listaPrueba) == false)
+    listaPrueba.limpia
+    for(i <- 0 until 10) {
+      lista.agrega(i)
+      listaPrueba.agrega(i)
+    }
+    assert(lista.equals(listaPrueba) == true)
+    lista.limpia
+  }
 
-  test("Listas.longitud") {}
+  /** Test del método longitud de listas. */
+  test("Listas.longitud") {
+    assert(lista.longitud == 0)
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    lista.agrega(4)
+    assert(lista.longitud == 4)
+    lista.limpia
+  }
 
-  test("Listas.agregaFinal") {}
+  /** Test del método agregaFinal de listas. */
+  test("Listas.agregaFinal") {
+    lista.agregaFinal(1)
+    lista.agregaFinal(2)
+    assert(lista.ultimo == 2)
+    lista.eliminaUltimo
+    assert(lista.ultimo == 1)
+    lista.limpia
+  }
 
-  test("Listas.agregaInicio") {}
+  /** Test del método agregaInicio de listas. */
+  test("Listas.agregaInicio") {
+    lista.agregaInicio(1)
+    lista.agregaInicio(2)
+    assert(lista.ultimo == 1)
+    lista.eliminaUltimo
+    assert(lista.ultimo == 2)
+    lista.limpia
+  }
 
-  test("Listas.inserta") {}
+  /** Test del método inserta de listas. */
+  test("Listas.inserta") {
+    val listaPrueba = [1,3,2,3]
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    assert(lista.longitud == 3)
+    lista.inserta(1,3) //[1,3,2,3]
+    assert(lista.longitud == 4)
+    assert(lista.equals(listaPrueba))
+    lista.limpia
+  }
 
-  test("Listas.eliminaPrimero") {}
+  /** Test del método eliminaPrimero de listas. */
+  test("Listas.eliminaPrimero") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val valor = lista.eliminaPrimero
+    assert(valor == 1)
+    lista.limpia
+  }
 
-  test("Listas.eliminaUltimo") {}
+  /** Test del método eliminaUltimo de listas. */
+  test("Listas.eliminaUltimo") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val valor = lista.eliminaUltimo
+    assert(valor == 3)
+    lista.limpia
+  }
 
-  test("Listas.primero") {}
+  /** Test del método primero de listas. */
+  test("Listas.primero") {
+    lista.agrega(9)
+    lista.agrega(2)
+    lista.agrega(6)
+    lista.agrega(1)
+    lista.agrega(7)
+    lista.agrega(8)
+    lista.agrega(92)
+    val valor = lista.primero
+    assert(valor == 9)
+    lista.limpia
+  }
 
-  test("Listas.ultimo") {}
+  /** Test del método ultimo de listas. */
+  test("Listas.ultimo") {
+    lista.agrega(9)
+    lista.agrega(2)
+    lista.agrega(6)
+    lista.agrega(1)
+    lista.agrega(7)
+    lista.agrega(8)
+    lista.agrega(92)
+    val valor = lista.ultimo
+    assert(valor == 92)
+    lista.limpia
+  }
 
-  test("Listas.obtener") {}
+  /** Test del método obtener de listas. */
+  test("Listas.obtener") {
+    lista.agrega(9)
+    lista.agrega(2)
+    lista.agrega(6)
+    lista.agrega(1)
+    lista.agrega(7)
+    lista.agrega(8)
+    lista.agrega(92)
+    var valor = lista.obtener(0)
+    assert(valor == 9)
+    valor = lista.obtener(3)
+    assert(valor == 1)
+    valor = lista.obtener(6)
+    assert(valor == 92)
+    lista.limpia
+  }
 
-  test("Listas.copia") {}
+  /** Test del método copia de listas. */
+  test("Listas.copia") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val copia = lista.copia
+    assert(copia.equals(lista))
+    lista.limpia
+  }
 
-  test("Listas.reversa") {}
+  /** Test del método reversa de listas. */
+  test("Listas.reversa") {
+    lista.agrega(1)
+    lista.agrega(2)
+    lista.agrega(3)
+    val reversa = lista.reversa
+    assert(!reversa.equals(lista))
+    assert(reversa.obtener(0) == lista.obtener(2))
+    assert(reversa.obtener(1) == lista.obtener(1))
+    assert(reversa.obtener(2) == lista.obtener(0))
+    lista.limpia
+  }
 
-  test("Listas.indiceDe") {}
+  /** Test del método indiceDe de listas. */
+  test("Listas.indiceDe") {
+    lista.agrega(3)
+    lista.agrega(4)
+    lista.agrega(8)
+    assert(lista.indiceDe(3) == 0)
+    assert(lista.indiceDe(4) == 1)
+    assert(lista.indiceDe(8) == 2)
+    lista.limpia
+  }
 
-  test("Listas.hasNext") {}
+  /** Test del método hasNext de listas. */
+  test("Listas.hasNext") {
+    assert(iterador.hasNext == false)
+    lista.agrega(7)
+    assert(iterador.hasNext == true)
+    lista.limpia
+  }
 
-  test("Listas.next") {}
+  /** Test del método next de listas. */
+  test("Listas.next") {
+    lista.agrega(8)
+    lista.agrega(9)
+    lista.agrega(2)
+    iterador.start
+    assert(iterador.next == 8)
+    assert(iterador.next == 9)
+    lista.limpia
+  }
 
-  test("Listas.hasPrevious") {}
+  /** Test del método hasPrevious de listas. */
+  test("Listas.hasPrevious") {
+    assert(iterador.hasPrevious == false)
+    lista.agrega(7)
+    lista.agrega(3)
+    lista.agrega(78)
+    iterador.end
+    assert(iterador.hasPrevious == true)
+    lista.limpia
+  }
 
-  test("Listas.start") {}
+  /** Test del método previous de listas. */
+  test("Listas.previous") {
+    lista.agrega(8)
+    lista.agrega(9)
+    lista.agrega(2)
+    iterador.end
+    assert(iterador.previous == 2)
+    assert(iterador.previous == 9)
+    lista.limpia
+  }
 
-  test("Listas.end") {}
+  /** Test del método start de listas. */
+  test("Listas.start") {
+    for(i <- 0 until 100) {
+      lista.agrega(i)
+    }
+    iterador.start
+    assert(iterador.next == 0)
+    assert(iterador.next == 1)
+    lista.limpia
+  }
+
+  /** Test del método end de listas. */
+  test("Listas.end") {
+    for(i <- 0 until 100) {
+      lista.agrega(i)
+    }
+    iterador.end
+    assert(iterador.previous == 100)
+    assert(iterador.previous == 99)
+    lista.limpia
+  }
 
 }
